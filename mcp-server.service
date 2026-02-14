@@ -1,0 +1,46 @@
+# ─────────────────────────────────────────────────────────────────────────────
+# MCP Server — systemd service unit
+#
+# Install:
+#   sudo cp systemd/mcp-server.service /etc/systemd/system/
+#   sudo systemctl daemon-reload
+#   sudo systemctl enable --now mcp-server
+#
+# Logs:
+#   sudo journalctl -u mcp-server -f
+# ─────────────────────────────────────────────────────────────────────────────
+
+[Unit]
+Description=Base MCP Server
+After=network.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=mcp
+Group=mcp
+WorkingDirectory=/opt/mcp-server/src
+ExecStart=/opt/mcp-server/.venv/bin/python server.py
+
+# Environment
+EnvironmentFile=/opt/mcp-server/config/.env
+
+# Security hardening
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ReadWritePaths=/opt/mcp-server/logs
+
+# Restart policy
+Restart=on-failure
+RestartSec=5s
+StartLimitInterval=60s
+StartLimitBurst=3
+
+# Logging
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=mcp-server
+
+[Install]
+WantedBy=multi-user.target

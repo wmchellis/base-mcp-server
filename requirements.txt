@@ -1,0 +1,29 @@
+# ─────────────────────────────────────────────────────────────────────────────
+# MCP Server — Python Dependencies
+# Install base first, then add integration deps as you build each module.
+# ─────────────────────────────────────────────────────────────────────────────
+
+# ── Phase 1: Base server (install now) ───────────────────────────────────────
+mcp>=1.0.0
+python-dotenv>=1.0.0
+
+# ── Phase 2: PDF tools ───────────────────────────────────────────────────────
+# pip install pymupdf pdfplumber pypdf reportlab
+# pymupdf>=1.23.0
+# pdfplumber>=0.10.0
+# pypdf>=4.0.0
+# reportlab>=4.0.0
+
+# ── Phase 3: Google Drive ─────────────────────────────────────────────────────
+# pip install google-api-python-client google-auth
+# google-api-python-client>=2.100.0
+# google-auth>=2.23.0
+
+# ── Phase 4: Proxmox ─────────────────────────────────────────────────────────
+# pip install proxmoxer requests
+# proxmoxer>=2.0.0
+# requests>=2.31.0
+
+# ── Phase 5: Kali (SSH) ───────────────────────────────────────────────────────
+# pip install asyncssh
+# asyncssh>=2.14.0
